@@ -1,0 +1,18 @@
+schema_version: 1
+name: scene9-dense-overlap21
+
+workflow:
+  name: gaussian_generation
+  version: 4
+
+input:
+  reader: gaussian_depth_export
+  info_file: gaussian/scene9-full-native-left1-v1/manifest.json
+  source_transforms: gaussian/scene9-camera-table/transforms.json
+  source_intrinsics: gaussian/scene9-camera-table/intrinsics.json
+  selection: selections/legacy/scene9/dense-overlap21.yaml
+
+recipe: recipes/gaussian-generation/dense-overlap21.yaml
+
+execution:
+  preset: inference_cp2

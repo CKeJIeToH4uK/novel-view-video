@@ -1,0 +1,16 @@
+schema_version: 1
+name: gaussian-independent-clip-v1
+
+workflow:
+  name: gaussian_generation
+  version: 2
+
+input:
+  reader: gaussian_depth_export
+  info_file: gaussian/replace-export/export.json
+  selection: selections/gaussian/independent-clip.yaml
+
+recipe: recipes/gaussian-generation/independent-clip.yaml
+
+execution:
+  preset: inference_cp2

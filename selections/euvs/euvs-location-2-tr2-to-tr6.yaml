@@ -1,0 +1,93 @@
+schema_version: 1
+
+pairs:
+  - name: location-2-tr2-to-tr6
+    tags: [setting-1, first-gen3c-run]
+    location: "2"
+    direction: source_to_target
+    channel: CAM_F0
+    source:
+      traversal: "2"
+      image_tokens:
+        - 3b9cbbefe0195af4
+        - 38fce357ce695a59
+        - 2aa0578b0c395470
+        - 87b9cb3f439d5109
+        - e263c7f79f9a5c43
+        - 35bb8b055a1b5871
+        - 29241553b8e65836
+        - 8c4d1dc8493e5ffa
+        - 2a4f7cb79d435b40
+        - 9ee7a72f28cf586e
+        - f06f2d9dbbcc51aa
+        - ec7ba9fa042257ce
+        - 79d5895b52245bf9
+        - 61991fa4840a5f10
+        - 4ac1c55ec860571b
+        - f9381cb073e3512e
+        - 230d64acd7385b43
+        - 945f99620df75814
+        - a932266a72d75909
+        - b253015bfa7a5048
+        - 770f912da75f5061
+        - 9affa459ca8e56a5
+        - de116e59bd065195
+        - a50f7dc1718d5242
+        - 12318e657ca55562
+        - 303ef4d881805c94
+        - 5ed7701e2aa95ee0
+        - 4883d8d220bb5553
+        - 662d5c0f0171523a
+        - 91efd744c4f85062
+        - 97f02ebeedc85665
+        - 277311ff3ab8563b
+        - 6fd1fedb70b75489
+        - ef3d6289e71c5368
+        - 19eff799658b522c
+        - aa3dfa543d7851d9
+        - 279de7c1897f51ba
+        - c803119402475630
+        - 9bce067e5de15094
+        - bda98a26d96f514d
+        - 2453c8b627085746
+        - caa2cee379b351f4
+        - 536dbc71185f5124
+    target:
+      traversal: "6"
+      image_tokens:
+        - 51d7ca0e5b3a5a62
+        - 11062fb7caa45dfb
+        - 0fff143cad025ce3
+        - 5dec0df51ffa527e
+        - 5cf847ec7b1d5899
+        - 2500b0b52d8d54c4
+        - 46ad5a07f1ec566d
+        - a640f0cf9b135db3
+        - 896cc2bf89ab58cb
+        - b9eca192d0c85821
+        - aacbbc0d9d8a5abd
+        - 510bb699e09b59c7
+        - 1c421af15a785808
+        - 34e261f31c795a25
+        - 970bafa348e953ac
+        - adfa6ab186d65938
+        - b5acc136a8505ec3
+        - 04dc056b47765bf5
+        - 5ed3b1c18ab35482
+        - 7fa4939a6eae5f72
+        - fd0c0563092c5c8c
+        - f9256746a4975719
+        - 6af1a6fe95dd55a2
+        - 8ad9a0ce9b305fa5
+        - 2db397657f495be2
+        - 9e4ec0fa96355a07
+        - 6dabd914a8045e42
+        - 39b681539f5c5e10
+        - 4320289a48975214
+        - 8fcbf6bb20965660
+        - 3bed2ed6894353e0
+        - 470976a6ad215bf8
+        - a9f7850df3945cab
+        - 14eadda195345cf3
+        - 8bbeea484cf65ec9
+        - 5d77dbc6436a532b

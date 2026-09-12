@@ -1,0 +1,16 @@
+schema_version: 1
+name: waymo-depth-candidates
+
+workflow:
+  name: waymo_depth_comparison
+  version: 1
+
+input:
+  reader: waymo_v2
+  dataset: waymo
+  selection: selections/local/waymo-depth-clip.yaml
+
+recipe: recipes/legacy/waymo/depth-comparison.yaml
+
+execution:
+  preset: inference_cp1

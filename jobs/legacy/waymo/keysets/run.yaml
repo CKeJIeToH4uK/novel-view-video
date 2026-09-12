@@ -1,0 +1,16 @@
+schema_version: 1
+name: waymo-keysets
+
+workflow:
+  name: waymo_keysets
+  version: 1
+
+input:
+  reader: waymo_v2
+  dataset: waymo
+  selection: selections/local/waymo-segments-v1.yaml
+
+parameters: {}
+
+execution:
+  preset: cpu_test

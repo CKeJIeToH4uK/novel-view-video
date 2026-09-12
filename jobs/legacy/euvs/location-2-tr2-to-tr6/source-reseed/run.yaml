@@ -1,0 +1,17 @@
+schema_version: 1
+name: euvs-location-2-tr2-to-tr6-source-reseed-v2
+
+workflow:
+  name: euvs_generation
+  version: 2
+
+input:
+  reader: euvs_nuplan
+  dataset: euvs
+  selection: selections/euvs/euvs-location-2-tr2-to-tr6.yaml
+  source_views_attempt: euvs-location-2-tr2-to-tr6-source-views-v1/replace-run/attempts/replace-attempt
+
+recipe: recipes/euvs-generation/gen3c-source-reseed.yaml
+
+execution:
+  preset: inference_cp1

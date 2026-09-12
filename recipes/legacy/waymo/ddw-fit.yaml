@@ -1,0 +1,3 @@
+schema_version: 1
+parameters:
+  moge_checkpoint: moge-vitl/model.pt

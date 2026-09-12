@@ -1,0 +1,7 @@
+schema_version: 1
+name: waymo-ddw-fit-collect
+workflow: {name: waymo_ddw_fit_collection, version: 1}
+input:
+  selection: selections/legacy/waymo/example-fit-collection.yaml
+parameters: {}
+execution: {preset: cpu_test}

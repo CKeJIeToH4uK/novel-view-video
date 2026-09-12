@@ -1,0 +1,16 @@
+schema_version: 1
+name: compare-r4c-edm-depth
+
+workflow:
+  name: ddw_evaluation
+  version: 1
+
+input:
+  prepared_record: waymo-ddw/r4c-ddw-prepared/prepared.json
+  split: selections/local/r4c-ddw85-split.yaml
+  v1_checkpoint_record: r4c-lora-edm/replace-run/attempts/replace-attempt/checkpoints/step-000000154.json
+  v2_checkpoint_record: r4c-lora-lidar-depth/replace-run/attempts/replace-attempt/checkpoints/step-000000154.json
+
+recipe: recipes/ddw-evaluation/r4c-lidar-depth.yaml
+execution:
+  preset: training_cp4

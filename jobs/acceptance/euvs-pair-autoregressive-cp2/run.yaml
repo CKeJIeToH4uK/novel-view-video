@@ -1,0 +1,17 @@
+schema_version: 1
+name: euvs-pair-autoregressive-cp2
+
+workflow:
+  name: euvs_generation
+  version: 1
+
+input:
+  reader: euvs_nuplan
+  dataset: euvs
+  selection: selections/euvs/one-pair.yaml
+  source_views_attempt: euvs-source-views-v1/replace-run/attempts/replace-attempt
+
+recipe: recipes/euvs-generation/gen3c-autoregressive.yaml
+
+execution:
+  preset: inference_cp2

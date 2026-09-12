@@ -1,0 +1,10 @@
+schema_version: 1
+candidate_results:
+  - waymo-depth-candidates/run-0000/attempt-0000/result.json
+  - waymo-depth-candidates/run-0001/attempt-0000/result.json
+  - waymo-depth-candidates/run-0002/attempt-0000/result.json
+  - waymo-depth-candidates/run-0003/attempt-0000/result.json
+  - waymo-depth-candidates/run-0004/attempt-0000/result.json
+  - waymo-depth-candidates/run-0005/attempt-0000/result.json
+  - waymo-depth-candidates/run-0006/attempt-0000/result.json
+  - waymo-depth-candidates/run-0007/attempt-0000/result.json

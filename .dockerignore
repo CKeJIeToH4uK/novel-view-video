@@ -1,0 +1,62 @@
+# Git metadata never describes the wheel inside an image. Build arguments do.
+.git
+.git/**
+
+# Local tools and caches.
+.DS_Store
+.vscode
+.claude
+**/__pycache__
+**/*.py[cod]
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/.venv
+**/venv
+
+# Local Python build products. Project wheels are built inside Docker.
+**/build
+**/dist
+**/*.egg-info
+**/*.whl
+
+# Machine-local configuration and secrets.
+.env
+**/.env
+**/*.local.env
+**/*.local.yaml
+**/*.local.yml
+**/*.local.json
+profiles/local
+jobs/local
+selections/local
+secrets
+
+# External resources and generated state.
+data
+datasets
+models
+weights
+upstream
+software
+runs
+prepared
+prepared_data
+cache
+
+# Release-candidate products are outputs, never build inputs.
+**/candidate.json
+**/images.tar
+**/candidate-output
+**/candidate-bundle
+
+# Unrelated component and historical evidence are not build inputs.
+3dgs
+logs
+plans
+
+# Local transfer and backup files.
+*.bundle
+*.tar
+*.tar.gz
+*.tgz

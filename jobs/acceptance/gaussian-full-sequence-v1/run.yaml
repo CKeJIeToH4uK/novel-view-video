@@ -1,0 +1,16 @@
+schema_version: 1
+name: gaussian-full-sequence-v1
+
+workflow:
+  name: gaussian_generation
+  version: 1
+
+input:
+  reader: gaussian_depth_export
+  info_file: gaussian/replace-export/export.json
+  selection: selections/gaussian/full-sequence.yaml
+
+recipe: recipes/gaussian-generation/full-sequence.yaml
+
+execution:
+  preset: inference_cp2

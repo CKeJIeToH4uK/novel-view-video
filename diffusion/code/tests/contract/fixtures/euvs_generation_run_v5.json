@@ -1,0 +1,49 @@
+{
+  "schema": "novel-view/euvs-gen3c-run/v5",
+  "record_provenance": "native",
+  "experiment": "euvs-fixture",
+  "pair": {
+    "name": "pair-a",
+    "location": "boston",
+    "direction": "source_to_target",
+    "channel": "CAM_F0",
+    "source": {"traversal": "source", "image_tokens": ["s0", "s1"]},
+    "target": {"traversal": "target", "image_tokens": ["t0", "t1"]}
+  },
+  "conditioning": {
+    "protocol": "direct-projected-nearest-single-source/v1",
+    "target_output_index": [1, 6],
+    "target_source_sequence_index": [0, 1]
+  },
+  "geometry": {
+    "backend": "vggt-omega",
+    "runs_relative_directory": "source-views/s0",
+    "provenance": "ordered-source-tokens"
+  },
+  "model": {
+    "model_id": "ddw-step-1309",
+    "models_relative_checkpoint": "gen3c/ddw-step-1309.pt",
+    "artifact_type": "lora-training-checkpoint",
+    "lora": {
+      "working_manifest": "/runs/ddw-working.json",
+      "evidence_path": "/code/ddw-evidence.json",
+      "epochs": 20,
+      "strength": 0.35
+    }
+  },
+  "sampling": {
+    "seed": 7,
+    "prompt": "",
+    "negative_prompt": "negative",
+    "guidance": 1.0,
+    "num_steps": 35,
+    "window_seed_policy": "source-reseed/v1"
+  },
+  "execution": {"context_parallel_size": 2},
+  "output": {
+    "file": "generated_rgb.npy",
+    "shape": [121, 704, 1280, 3],
+    "dtype": "uint8",
+    "color_space": "RGB"
+  }
+}

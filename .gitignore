@@ -1,0 +1,43 @@
+# Personal assistant notes are local and are not a source of truth.
+CLAUDE.md
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.claude/
+
+# Machine-local project configuration
+.env
+*.local.env
+*.local.yaml
+*.local.yml
+*.local.json
+/profiles/local/
+/jobs/local/
+/selections/local/
+
+# External resources and run state
+/data/
+/datasets/
+/models/
+/weights/
+/upstream/
+/software/
+/runs/
+/prepared/
+/prepared_data/
+/cache/
+/secrets/
+
+# Local transfer and backup files
+*.bundle
+*.tar
+*.tar.gz
+*.tgz

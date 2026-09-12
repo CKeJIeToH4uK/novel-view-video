@@ -1,0 +1,5 @@
+schema_version: 1
+training_sample_ids:
+  - example-front-0002
+validation_sample_ids:
+  - example-front-0001

@@ -1,0 +1,9 @@
+schema_version: 1
+name: waymo-ddw-fit-audit
+workflow: {name: waymo_ddw_audit, version: 1}
+input:
+  reader: waymo_v2
+  dataset: waymo
+  item_record: waymo-ddw-fit/example/attempts/0001/items/clip-0000/clip.json
+recipe: recipes/legacy/waymo/ddw-fit.yaml
+execution: {preset: inference_cp1}

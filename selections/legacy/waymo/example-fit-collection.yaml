@@ -1,0 +1,5 @@
+schema_version: 1
+keyset: waymo-keysets/example/attempts/0001/keysets/fit-central-v1.json
+item_records:
+  - waymo-ddw-fit/example/attempts/0001/items/clip-0000/clip.json
+  - waymo-ddw-fit/example/attempts/0002/items/clip-0001/clip.json

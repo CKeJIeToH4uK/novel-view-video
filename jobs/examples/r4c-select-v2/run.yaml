@@ -1,0 +1,15 @@
+schema_version: 1
+name: select-r4c-lora-lidar-depth
+
+workflow:
+  name: gen3c_checkpoint_selection
+  version: 2
+
+input:
+  checkpoint_records:
+    - r4c-lora-lidar-depth/replace-run/attempts/replace-attempt/checkpoints/step-000000077.json
+    - r4c-lora-lidar-depth/replace-run/attempts/replace-attempt/checkpoints/step-000000154.json
+
+parameters: {}
+execution:
+  preset: cpu_test

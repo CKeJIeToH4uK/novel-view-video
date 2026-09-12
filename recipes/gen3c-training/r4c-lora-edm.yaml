@@ -1,0 +1,13 @@
+schema_version: 1
+
+parameters:
+  model:
+    checkpoint: gen3c/official/checkpoints/Gen3C-Cosmos-7B/model.pt
+  training:
+    method: lora
+    objective:
+      name: gen3c-kendall-edm
+      version: 1
+    epochs: 2
+    training_seed: 0
+    validation_seed: 1

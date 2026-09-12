@@ -1,0 +1,17 @@
+schema_version: 1
+name: euvs-extended16-autoregressive-v1
+
+workflow:
+  name: euvs_generation
+  version: 1
+
+input:
+  reader: euvs_nuplan
+  dataset: euvs
+  selection: selections/euvs/euvs-setting1-extended16.yaml
+  source_views_attempt: euvs-extended16-source-views-v1/replace-run/attempts/replace-attempt
+
+recipe: recipes/euvs-generation/gen3c-autoregressive.yaml
+
+execution:
+  preset: inference_cp1

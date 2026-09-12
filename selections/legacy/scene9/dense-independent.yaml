@@ -1,0 +1,6 @@
+schema_version: 1
+kind: dense_independent
+scene_id: 9
+source_pose_range:
+  start: 0
+  stop: 477

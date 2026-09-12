@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "novel-view-pipeline"
+version = "0.1.0"
+description = "Compact novel-view pipeline for parallel nuPlan traversals"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.10"
+dependencies = [
+  "numpy==1.26.4",
+  "opencv-python-headless==4.10.0.84",
+  "Pillow==10.4.0",
+  "PyYAML==6.0.2",
+]
+
+[project.optional-dependencies]
+waymo-data = ["pyarrow==21.0.0"]
+
+[project.scripts]
+novel-view = "novel_view.cli.legacy:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = ["--strict-markers"]
+markers = ["native_api: installed model API proof, outside the CPU-only test image"]
+testpaths = ["tests/unit", "tests/contract", "tests/integration"]

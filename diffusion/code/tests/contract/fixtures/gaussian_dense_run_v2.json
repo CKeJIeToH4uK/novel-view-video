@@ -1,0 +1,51 @@
+{
+  "format": "gaussian_scene_gen3c_run",
+  "format_version": 2,
+  "method": "dense-independent/v1",
+  "input": {
+    "manifest": "export.json",
+    "scene_id": 9,
+    "splats_variant": "v3-refined",
+    "source_camera": "front",
+    "dense_camera": "left_1.0",
+    "dense_transforms": "../../dense-camera-table/transforms.json",
+    "dense_intrinsics": "../../dense-camera-table/intrinsics.json",
+    "dense_camera_ids": [0, 5, 10],
+    "target_output_index": [1, 2, 3],
+    "target_source_pose_indices": [0, 0, 1]
+  },
+  "chunk": {
+    "index": 0,
+    "count": 1,
+    "padding_frame_count": 117,
+    "padding_policy": "hold-last/v1"
+  },
+  "generation": {
+    "model_id": "gen3c",
+    "network_checkpoint": "/models/gen3c/base.pt",
+    "seed": 7,
+    "prompt": "",
+    "negative_prompt": "",
+    "guidance": 3.0,
+    "num_steps": 35,
+    "context_parallel_size": 1,
+    "model_frame_count": 121,
+    "unpadded_frame_count": 4,
+    "elapsed_seconds": 1.0,
+    "per_rank_peak_cuda_allocated_bytes": [0],
+    "per_rank_peak_cuda_reserved_bytes": [0]
+  },
+  "outputs": {
+    "generated_rgb": {
+      "path": "generated_rgb.npy",
+      "shape": [121, 704, 1280, 3],
+      "frame_count": 121,
+      "dtype": "uint8"
+    },
+    "target_video": {
+      "path": "targets.mp4",
+      "frame_count": 3,
+      "fps": 24
+    }
+  }
+}

@@ -1,0 +1,4 @@
+schema_version: 1
+kind: independent_clips
+scene_id: 0
+clip_indices: [1]

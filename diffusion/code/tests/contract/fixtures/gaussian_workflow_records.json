@@ -1,0 +1,449 @@
+{
+  "1": [
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 1,
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "camera": "/camera/inner/frontal/middle",
+        "target": "left_1.0",
+        "selected_pose_indices": [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392],
+        "target_output_index": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383]
+      },
+      "raster": {
+        "source_size_hw": [4,8],
+        "output_size_hw": [8,16],
+        "resized_size_hw": [8,16],
+        "crop_top": 0,
+        "crop_left": 0
+      },
+      "generation": {
+        "model_id": "gen3c-cosmos-7b-official",
+        "network_checkpoint": "<test-root>/models/gen3c/official/checkpoints/Gen3C-Cosmos-7B/model.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 481,
+        "unpadded_frame_count": 384,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4]
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [481,8,16,3],
+          "frame_count": 481,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 383,
+          "fps": 24
+        }
+      }
+    }
+  ],
+  "2": [
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 1,
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "camera": "/camera/inner/frontal/middle",
+        "target": "left_1.0",
+        "selected_pose_indices": [273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392],
+        "target_output_index": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120],
+        "independent_clip": {
+          "index": 4,
+          "count": 4,
+          "target_start_index": 263,
+          "target_stop_index": 383,
+          "full_target_count": 383
+        }
+      },
+      "raster": {
+        "source_size_hw": [4,8],
+        "output_size_hw": [8,16],
+        "resized_size_hw": [8,16],
+        "crop_top": 0,
+        "crop_left": 0
+      },
+      "generation": {
+        "model_id": "gen3c-cosmos-7b-official",
+        "network_checkpoint": "<test-root>/models/gen3c/official/checkpoints/Gen3C-Cosmos-7B/model.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 121,
+        "unpadded_frame_count": 121,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4]
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [121,8,16,3],
+          "frame_count": 121,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 120,
+          "fps": 24
+        }
+      }
+    },
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 1,
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "camera": "/camera/inner/frontal/middle",
+        "target": "left_1.0",
+        "selected_pose_indices": [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129],
+        "target_output_index": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120],
+        "independent_clip": {
+          "index": 1,
+          "count": 4,
+          "target_start_index": 0,
+          "target_stop_index": 120,
+          "full_target_count": 383
+        }
+      },
+      "raster": {
+        "source_size_hw": [4,8],
+        "output_size_hw": [8,16],
+        "resized_size_hw": [8,16],
+        "crop_top": 0,
+        "crop_left": 0
+      },
+      "generation": {
+        "model_id": "gen3c-cosmos-7b-official",
+        "network_checkpoint": "<test-root>/models/gen3c/official/checkpoints/Gen3C-Cosmos-7B/model.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 121,
+        "unpadded_frame_count": 121,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4]
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [121,8,16,3],
+          "frame_count": 121,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 120,
+          "fps": 24
+        }
+      }
+    }
+  ],
+  "3": [
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 2,
+      "method": "dense-independent/v1",
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "source_camera": "/camera/inner/frontal/middle",
+        "dense_camera": "/camera/inner/frontal/middle/left_1.0",
+        "dense_transforms": "../../dense-camera-table/transforms.json",
+        "dense_intrinsics": "../../dense-camera-table/intrinsics.json",
+        "dense_camera_ids": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119],
+        "target_output_index": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120],
+        "target_source_pose_indices": [10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18,19,19,20,20,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,35,35,36,36,37,37,38,38,39,39,40,40,41,41,42,42,43,43,44,44,45,45,46,46,47,47,48,48,49,49,50,50,51,51,52,52,53,53,54,54,55,55,56,56,57,57,58,58,59,59,60,60,61,61,62,62,63,63,64,64,65,65,66,66,67,67,68,68,69,69,70]
+      },
+      "chunk": {
+        "index": 0,
+        "count": 2,
+        "padding_frame_count": 0,
+        "padding_policy": "hold-last/v1"
+      },
+      "generation": {
+        "model_id": "dense-lora",
+        "network_checkpoint": "<test-root>/models/gen3c/tuned.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 121,
+        "unpadded_frame_count": 121,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4],
+        "lora": {
+          "working_manifest": "/models/working.json",
+          "evidence_path": "/models/evidence.json",
+          "epochs": 20,
+          "strength": 0.25
+        }
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [121,8,16,3],
+          "frame_count": 121,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 120,
+          "fps": 24
+        }
+      }
+    },
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 2,
+      "method": "dense-independent/v1",
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "source_camera": "/camera/inner/frontal/middle",
+        "dense_camera": "/camera/inner/frontal/middle/left_1.0",
+        "dense_transforms": "../../dense-camera-table/transforms.json",
+        "dense_intrinsics": "../../dense-camera-table/intrinsics.json",
+        "dense_camera_ids": [120,121,122],
+        "target_output_index": [1,2,3],
+        "target_source_pose_indices": [70,71,71]
+      },
+      "chunk": {
+        "index": 1,
+        "count": 2,
+        "padding_frame_count": 117,
+        "padding_policy": "hold-last/v1"
+      },
+      "generation": {
+        "model_id": "dense-lora",
+        "network_checkpoint": "<test-root>/models/gen3c/tuned.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 121,
+        "unpadded_frame_count": 4,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4],
+        "lora": {
+          "working_manifest": "/models/working.json",
+          "evidence_path": "/models/evidence.json",
+          "epochs": 20,
+          "strength": 0.25
+        }
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [121,8,16,3],
+          "frame_count": 121,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 3,
+          "fps": 24
+        }
+      }
+    }
+  ],
+  "4": [
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 3,
+      "method": "dense-overlap21/v1",
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "source_camera": "/camera/inner/frontal/middle",
+        "dense_camera": "/camera/inner/frontal/middle/left_1.0",
+        "dense_transforms": "../../dense-camera-table/transforms.json",
+        "dense_intrinsics": "../../dense-camera-table/intrinsics.json",
+        "dense_camera_ids": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119],
+        "target_output_index": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120],
+        "target_source_pose_indices": [10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18,19,19,20,20,21,21,22,22,23,23,24,24,25,25,26,26,27,27,28,28,29,29,30,30,31,31,32,32,33,33,34,34,35,35,36,36,37,37,38,38,39,39,40,40,41,41,42,42,43,43,44,44,45,45,46,46,47,47,48,48,49,49,50,50,51,51,52,52,53,53,54,54,55,55,56,56,57,57,58,58,59,59,60,60,61,61,62,62,63,63,64,64,65,65,66,66,67,67,68,68,69,69,70]
+      },
+      "chunk": {
+        "index": 0,
+        "count": 2,
+        "production_target_count": 100,
+        "context_target_count": 20,
+        "padding_frame_count": 0,
+        "padding_policy": "hold-last/v1",
+        "previous_record": null
+      },
+      "generation": {
+        "model_id": "dense-lora",
+        "network_checkpoint": "<test-root>/models/gen3c/tuned.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 121,
+        "unpadded_frame_count": 121,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4],
+        "lora": {
+          "working_manifest": "/models/working.json",
+          "evidence_path": "/models/evidence.json",
+          "epochs": 20,
+          "strength": 0.25
+        }
+      },
+      "context_depth": {
+        "backend": "Ruicheng/moge-vitl",
+        "model": "<test-root>/models/moge/model.pt",
+        "alignment": "official-rigid-inverse-depth/v1",
+        "max_depth_m": 100,
+        "local_filter": {
+          "window_size": 5,
+          "ratio_threshold": 0.05
+        },
+        "neighbour_threshold": {
+          "absolute_m": 0.1,
+          "relative": 0.05
+        }
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [121,8,16,3],
+          "frame_count": 121,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 100,
+          "fps": 24
+        },
+        "context_depth": {
+          "depth_path": "context-depth.npy",
+          "valid_path": "context-valid.npy",
+          "shape": [20,8,16],
+          "alignment_scale": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+          "alignment_bias": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          "alignment_mae_m": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          "valid_fraction": [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        }
+      }
+    },
+    {
+      "format": "gaussian_scene_gen3c_run",
+      "format_version": 3,
+      "method": "dense-overlap21/v1",
+      "input": {
+        "manifest": "<test-root>/data/gaussian/export.json",
+        "scene_id": 9,
+        "splats_variant": "v3-refined",
+        "source_camera": "/camera/inner/frontal/middle",
+        "dense_camera": "/camera/inner/frontal/middle/left_1.0",
+        "dense_transforms": "../../dense-camera-table/transforms.json",
+        "dense_intrinsics": "../../dense-camera-table/intrinsics.json",
+        "dense_camera_ids": [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122],
+        "target_output_index": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+        "target_source_pose_indices": [60,61,61,62,62,63,63,64,64,65,65,66,66,67,67,68,68,69,69,70,70,71,71]
+      },
+      "chunk": {
+        "index": 1,
+        "count": 2,
+        "production_target_count": 23,
+        "context_target_count": 0,
+        "padding_frame_count": 97,
+        "padding_policy": "hold-last/v1",
+        "previous_record": "../chunk-000/run.json"
+      },
+      "generation": {
+        "model_id": "dense-lora",
+        "network_checkpoint": "<test-root>/models/gen3c/tuned.pt",
+        "seed": 7,
+        "prompt": "",
+        "negative_prompt": "The video captures a series of frames showing ugly scenes, static with no motion, motion blur, over-saturation, shaky footage, low resolution, grainy texture, pixelated images, poorly lit areas, underexposed and overexposed scenes, poor color balance, washed out colors, choppy sequences, jerky movements, low frame rate, artifacting, color banding, unnatural transitions, outdated special effects, fake elements, unconvincing visuals, poorly edited content, jump cuts, visual noise, and flickering. Overall, the video is of poor quality.",
+        "guidance": 1,
+        "num_steps": 35,
+        "context_parallel_size": 2,
+        "model_frame_count": 121,
+        "unpadded_frame_count": 24,
+        "elapsed_seconds": 0.1,
+        "per_rank_peak_cuda_allocated_bytes": [1,2],
+        "per_rank_peak_cuda_reserved_bytes": [3,4],
+        "lora": {
+          "working_manifest": "/models/working.json",
+          "evidence_path": "/models/evidence.json",
+          "epochs": 20,
+          "strength": 0.25
+        }
+      },
+      "context_depth": {
+        "backend": "Ruicheng/moge-vitl",
+        "model": "<test-root>/models/moge/model.pt",
+        "alignment": "official-rigid-inverse-depth/v1",
+        "max_depth_m": 100,
+        "local_filter": {
+          "window_size": 5,
+          "ratio_threshold": 0.05
+        },
+        "neighbour_threshold": {
+          "absolute_m": 0.1,
+          "relative": 0.05
+        }
+      },
+      "outputs": {
+        "generated_rgb": {
+          "path": "generated_rgb.npy",
+          "shape": [121,8,16,3],
+          "frame_count": 121,
+          "dtype": "uint8"
+        },
+        "target_video": {
+          "path": "targets.mp4",
+          "frame_count": 23,
+          "fps": 24
+        }
+      },
+      "seam": {
+        "previous_context_vs_current_production": {
+          "dense_camera_ids": [100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119],
+          "frame_rgb_mse": [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+          "frame_rgb_psnr": [38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586,38.58837851428586],
+          "pooled_rgb_mse": 9,
+          "pooled_rgb_psnr": 38.58837851428586,
+          "null_psnr_means_positive_infinity": true
+        }
+      }
+    }
+  ]
+}

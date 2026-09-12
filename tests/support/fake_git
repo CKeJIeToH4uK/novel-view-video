@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ -z "${FAKE_GIT_REVISION:-}" ]]; then
+  exec /usr/bin/git "$@"
+fi
+
+case " $* " in
+  *" rev-parse HEAD "*)
+    printf '%s\n' "${FAKE_GIT_REVISION}"
+    ;;
+  *" status --porcelain "*)
+    if [[ "${FAKE_GIT_DIRTY:-false}" == true ]]; then
+      printf '%s\n' ' M tracked-file'
+    fi
+    ;;
+  *)
+    exec /usr/bin/git "$@"
+    ;;
+esac

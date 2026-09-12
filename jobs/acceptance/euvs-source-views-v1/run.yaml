@@ -1,0 +1,16 @@
+schema_version: 1
+name: euvs-source-views-v1
+
+workflow:
+  name: euvs_source_views
+  version: 1
+
+input:
+  reader: euvs_nuplan
+  dataset: euvs
+  selection: selections/euvs/one-pair.yaml
+
+recipe: recipes/euvs-generation/vggt-omega-source-geometry.yaml
+
+execution:
+  preset: inference_cp1

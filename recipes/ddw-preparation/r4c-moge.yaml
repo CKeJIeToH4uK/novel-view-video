@@ -1,0 +1,10 @@
+schema_version: 1
+
+parameters:
+  model_contract: gen3c-cosmos-7b-121x704x1280-fps10-v1
+  depth:
+    backend: moge
+    checkpoint: moge-vitl/model.pt
+  gen3c:
+    tokenizer: gen3c/official/checkpoints/Cosmos-Tokenize1-CV8x8x8-720p
+    text_encoder: gen3c/official/checkpoints/google-t5/t5-11b

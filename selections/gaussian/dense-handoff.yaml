@@ -1,0 +1,4 @@
+schema_version: 1
+kind: dense_handoff
+scene_id: 0
+dense_camera_ids: [0, 5, 10]

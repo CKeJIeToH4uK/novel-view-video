@@ -1,0 +1,19 @@
+schema_version: 1
+name: euvs-evaluation-run-v1
+
+workflow:
+  name: euvs_evaluation
+  version: 1
+
+input:
+  reader: euvs_nuplan
+  dataset: euvs
+  selection: selections/euvs/one-pair.yaml
+  generation:
+    source: attempt
+    path: euvs-pair-autoregressive-v1/replace-run/attempts/replace-attempt
+
+recipe: recipes/evaluation/euvs-v1.yaml
+
+execution:
+  preset: inference_cp1

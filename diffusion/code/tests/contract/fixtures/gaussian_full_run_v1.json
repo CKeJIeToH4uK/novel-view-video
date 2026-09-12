@@ -1,0 +1,48 @@
+{
+  "format": "gaussian_scene_gen3c_run",
+  "format_version": 1,
+  "input": {
+    "manifest": "/data/gaussian/export.json",
+    "scene_id": 9,
+    "splats_variant": "v3-refined",
+    "camera": "/camera/inner/frontal/middle",
+    "target": "left_1.0",
+    "selected_pose_indices": [2, 5],
+    "target_output_index": [1, 2]
+  },
+  "raster": {
+    "source_size_hw": [4, 4],
+    "output_size_hw": [704, 1280],
+    "resized_size_hw": [1280, 1280],
+    "crop_top": 288,
+    "crop_left": 0
+  },
+  "generation": {
+    "model_id": "gen3c",
+    "network_checkpoint": "/models/gen3c/base.pt",
+    "seed": 7,
+    "prompt": "",
+    "negative_prompt": "",
+    "guidance": 3.0,
+    "num_steps": 35,
+    "context_parallel_size": 2,
+    "model_frame_count": 121,
+    "unpadded_frame_count": 3,
+    "elapsed_seconds": 1.0,
+    "per_rank_peak_cuda_allocated_bytes": [0, 0],
+    "per_rank_peak_cuda_reserved_bytes": [0, 0]
+  },
+  "outputs": {
+    "generated_rgb": {
+      "path": "generated_rgb.npy",
+      "shape": [121, 704, 1280, 3],
+      "frame_count": 121,
+      "dtype": "uint8"
+    },
+    "target_video": {
+      "path": "targets.mp4",
+      "frame_count": 2,
+      "fps": 24
+    }
+  }
+}

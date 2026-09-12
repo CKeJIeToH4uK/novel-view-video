@@ -1,0 +1,6 @@
+schema_version: 1
+kind: dense_overlap21
+scene_id: 0
+source_pose_range:
+  start: 0
+  stop: 12

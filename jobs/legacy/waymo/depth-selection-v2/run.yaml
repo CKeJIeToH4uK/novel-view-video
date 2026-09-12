@@ -1,0 +1,14 @@
+schema_version: 1
+name: waymo-depth-selection-v2
+
+workflow:
+  name: waymo_depth_selection
+  version: 2
+
+input:
+  selection: selections/local/waymo-depth-choice-8.yaml
+
+recipe: recipes/legacy/waymo/depth-gate-v2.yaml
+
+execution:
+  preset: cpu_test

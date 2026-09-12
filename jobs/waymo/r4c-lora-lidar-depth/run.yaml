@@ -1,0 +1,15 @@
+schema_version: 1
+name: r4c-lora-lidar-depth
+
+workflow:
+  name: gen3c_training
+  version: 2
+
+input:
+  prepared_record: waymo-ddw/r4c-ddw-prepared/prepared.json
+  split: selections/waymo/example-r4c-split.yaml
+
+recipe: recipes/gen3c-training/r4c-lora-lidar-depth.yaml
+
+execution:
+  preset: training_cp4

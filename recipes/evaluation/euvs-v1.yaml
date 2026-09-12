@@ -1,0 +1,4 @@
+schema_version: 1
+parameters:
+  evaluation:
+    mask_recipe: grounded-sam2-euvs-v1

@@ -1,0 +1,4 @@
+schema_version: 1
+# Полный ранее созданный keyset; не сокращать его перед назначением вариантов.
+keyset: waymo-keysets/example/attempts/0001/keysets/fit-central-v1.json
+indices: [0, 1]

@@ -1,0 +1,16 @@
+schema_version: 1
+name: gaussian-dense-png-handoff-v1
+
+workflow:
+  name: gaussian_generation
+  version: 5
+
+input:
+  independent_attempt: gaussian-dense-independent-v1/replace-run/attempts/replace-attempt
+  overlap_attempt: gaussian-dense-overlap21-v1/replace-run/attempts/replace-attempt
+  selection: selections/gaussian/dense-handoff.yaml
+
+recipe: recipes/gaussian-generation/png-handoff.yaml
+
+execution:
+  preset: cpu_test

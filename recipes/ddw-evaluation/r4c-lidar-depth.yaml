@@ -1,0 +1,16 @@
+schema_version: 1
+
+parameters:
+  model_contract: gen3c-cosmos-7b-121x704x1280-fps10-v1
+  comparison_step: 154
+  sampling:
+    seed: 0
+    steps: 35
+    guidance: 1.0
+    condition_augment_sigma: 0.001
+  gen3c:
+    base_checkpoint: gen3c/official/checkpoints/Gen3C-Cosmos-7B/model.pt
+    tokenizer: gen3c/official/checkpoints/Cosmos-Tokenize1-CV8x8x8-720p
+  depth:
+    backend: moge
+    checkpoint: moge-vitl/model.pt

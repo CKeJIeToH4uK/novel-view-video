@@ -1,0 +1,24 @@
+schema_version: 1
+pairs:
+  - name: pair-z
+    tags: [primary, night]
+    location: us-ma-boston
+    direction: source_to_target
+    channel: CAM_F0
+    source:
+      traversal: traversal-source-z
+      image_tokens: [source-03, source-01]
+    target:
+      traversal: traversal-target-z
+      image_tokens: [target-02, target-00]
+  - name: pair-a
+    tags: []
+    location: sg-one-north
+    direction: source_to_target
+    channel: CAM_F0
+    source:
+      traversal: traversal-source-a
+      image_tokens: [source-a]
+    target:
+      traversal: traversal-target-a
+      image_tokens: [target-a]

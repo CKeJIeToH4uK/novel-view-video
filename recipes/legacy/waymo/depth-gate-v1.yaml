@@ -1,0 +1,10 @@
+schema_version: 1
+
+parameters:
+  minimum_heldout_count: 300000
+  minimum_valid_fraction: 0.7
+  maximum_median_abs_rel: 0.2
+  maximum_p95_abs_z_m: 60.0
+  epsilon_depth: 0.005
+  maximum_peak_ram_mib: 16384.0
+  maximum_peak_vram_mib: 24576.0

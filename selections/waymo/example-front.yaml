@@ -1,0 +1,12 @@
+schema_version: 1
+samples:
+  - sample_id: example-front-0002
+    partition: training
+    segment_id: synthetic-segment-b
+    start_frame_index: 120
+    ddw: {magnitude_m: 0.5, sign: 1}
+  - sample_id: example-front-0001
+    partition: training
+    segment_id: synthetic-segment-a
+    start_frame_index: 0
+    ddw: {magnitude_m: 1.0, sign: -1}

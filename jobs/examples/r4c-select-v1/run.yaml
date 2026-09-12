@@ -1,0 +1,15 @@
+schema_version: 1
+name: select-r4c-lora-edm
+
+workflow:
+  name: gen3c_checkpoint_selection
+  version: 1
+
+input:
+  checkpoint_records:
+    - r4c-lora-edm/replace-run/attempts/replace-attempt/checkpoints/step-000000077.json
+    - r4c-lora-edm/replace-run/attempts/replace-attempt/checkpoints/step-000000154.json
+
+parameters: {}
+execution:
+  preset: cpu_test

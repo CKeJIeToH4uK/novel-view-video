@@ -1,0 +1,16 @@
+schema_version: 1
+parameters:
+  frame_rate: 24
+  dense:
+    densification_factor: 10
+    bake_stride: 5
+    production_capacity: 100
+    target_capacity: 120
+  generation:
+    backend: gen3c
+    checkpoint: gen3c/base
+    seed: 0
+    num_steps: 35
+  context_depth:
+    backend: moge
+    checkpoint: moge-vitl/model.pt

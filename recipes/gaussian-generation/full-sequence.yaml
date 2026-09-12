@@ -1,0 +1,8 @@
+schema_version: 1
+parameters:
+  frame_rate: 24
+  generation:
+    backend: gen3c
+    checkpoint: gen3c/base
+    seed: 0
+    num_steps: 35

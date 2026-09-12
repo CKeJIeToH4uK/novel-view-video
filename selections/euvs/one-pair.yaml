@@ -1,0 +1,13 @@
+schema_version: 1
+pairs:
+  - name: replace-pair
+    tags: [acceptance]
+    location: replace-location
+    direction: source_to_target
+    channel: CAM_F0
+    source:
+      traversal: replace-source-traversal
+      image_tokens: [replace-source-frame-0, replace-source-frame-1]
+    target:
+      traversal: replace-target-traversal
+      image_tokens: [replace-target-frame-0, replace-target-frame-1]

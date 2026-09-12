@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+count="${FAKE_NVIDIA_COUNT:-4}"
+for ((index=0; index<count; index++)); do
+  printf '%s, GPU-fake-%s, %s, %s, %s\n' \
+    "${index}" "${index}" "${FAKE_NVIDIA_MODEL:-NVIDIA A100-SXM4-80GB}" \
+    "${FAKE_NVIDIA_MEMORY:-81920}" "${FAKE_NVIDIA_MIG:-Disabled}"
+done

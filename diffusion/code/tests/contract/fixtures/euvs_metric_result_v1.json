@@ -1,0 +1,68 @@
+{
+  "frames": [
+    {
+      "source_aware_static": {
+        "dinov2_cosine": {
+          "status": "undefined",
+          "undefined_reason": "empty_support",
+          "value": null
+        },
+        "dinov2_patch_weight_sum": 0.0,
+        "lpips_alex": {
+          "status": "undefined",
+          "undefined_reason": "empty_support",
+          "value": null
+        },
+        "lpips_weight_sum": 0.0,
+        "psnr": {
+          "status": "undefined",
+          "undefined_reason": "empty_support",
+          "value": null
+        },
+        "raster_valid_pixel_count": 121,
+        "ssim": {
+          "status": "undefined",
+          "undefined_reason": "no_full_windows",
+          "value": null
+        },
+        "ssim_window_count": 0,
+        "support_fraction": 0.0,
+        "support_pixel_count": 0
+      },
+      "target_static": {
+        "dinov2_cosine": {
+          "status": "finite",
+          "undefined_reason": null,
+          "value": 0.75
+        },
+        "dinov2_patch_weight_sum": 1.0,
+        "lpips_alex": {
+          "status": "finite",
+          "undefined_reason": null,
+          "value": 0.25
+        },
+        "lpips_weight_sum": 121.0,
+        "psnr": {
+          "status": "positive_infinity",
+          "undefined_reason": null,
+          "value": null
+        },
+        "raster_valid_pixel_count": 121,
+        "ssim": {
+          "status": "finite",
+          "undefined_reason": null,
+          "value": 1.0
+        },
+        "ssim_window_count": 1,
+        "support_fraction": 1.0,
+        "support_pixel_count": 121
+      }
+    }
+  ],
+  "mask_recipe_id": "grounded-sam2-euvs-v1",
+  "metric_protocol": "audited-static/v1",
+  "projection_protocol": "four-neighbour-zbuffer/v1",
+  "run_record": "generation/attempt/pairs/pair-a/run.json",
+  "schema": "novel-view/euvs-metric-result/v1",
+  "support_protocol": "target-source-dynamic/v1"
+}

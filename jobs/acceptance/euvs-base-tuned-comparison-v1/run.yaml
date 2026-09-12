@@ -1,0 +1,18 @@
+schema_version: 1
+name: euvs-base-tuned-comparison-v1
+
+workflow:
+  name: euvs_comparison
+  version: 1
+
+input:
+  reader: euvs_nuplan
+  dataset: euvs
+  selection: selections/euvs/one-pair.yaml
+  base_evaluation: euvs-evaluation-run-v1/replace-run/attempts/replace-attempt
+  tuned_evaluation: external-euvs-tuned-evaluation/replace-run/attempts/replace-attempt
+
+parameters: {}
+
+execution:
+  preset: cpu_test

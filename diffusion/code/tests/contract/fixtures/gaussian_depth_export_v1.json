@@ -1,0 +1,118 @@
+{
+  "format": "gaussian_depth_export",
+  "format_version": 1,
+  "inputs": {
+    "scene_id": 9,
+    "splats_variant": "v3-refined",
+    "splats": "/external/reconstructions/v3-refined/9/splats.ply",
+    "transforms": "/external/reconstructions/v3/9/transforms.json",
+    "intrinsics": "/external/reconstructions/v3/9/intrinsics.json",
+    "environment": "/external/reconstructions/v3/9/env.pth"
+  },
+  "camera": {
+    "name": "/camera/inner/frontal/middle",
+    "image_size_hw": [1080, 1920],
+    "intrinsics": [
+      [1200.0, 0.0, 959.5],
+      [0.0, 1200.0, 539.5],
+      [0.0, 0.0, 1.0]
+    ],
+    "axes": "opencv_x_right_y_down_z_forward",
+    "pose": "world_to_camera",
+    "pixel_centers": 0.5
+  },
+  "render": {
+    "mode": "RGB+ED",
+    "near_plane_m": 0.01,
+    "far_plane_m": 10000000000.0
+  },
+  "depth": {
+    "kind": "expected_camera_z",
+    "units": "meters",
+    "dtype": "float32",
+    "invalid": "nan"
+  },
+  "mask": {
+    "dtype": "uint8",
+    "valid_value": 255,
+    "alpha_threshold": 0.5,
+    "edge_relative_threshold": 0.05,
+    "erode_pixels": 1,
+    "max_depth_m": null
+  },
+  "target": {
+    "name": "left_1.0",
+    "shift_camera_xyz_m": [-1.0, 0.0, 0.0]
+  },
+  "frames": [
+    {
+      "pose_index": 2,
+      "timestamp_ns": 1000000000,
+      "rgb": "frames/pose_00002/rgb.png",
+      "depth": "frames/pose_00002/depth.npy",
+      "mask": "frames/pose_00002/mask.png",
+      "source_w2c": [
+        [1.0, 0.0, 0.0, 2.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "target_w2c": [
+        [1.0, 0.0, 0.0, 3.0],
+        [0.0, 1.0, 0.0, 0.0],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "mask_stats": {
+        "sky_fraction": 0.1,
+        "out_of_range_fraction": 0.0,
+        "edge_fraction": 0.02,
+        "valid_fraction": 0.8,
+        "valid_fraction_of_content": 0.8888888888888888
+      },
+      "depth_percentiles_m": {
+        "p50": 12.0,
+        "p95": 40.0,
+        "p99": 55.0,
+        "max": 70.0
+      }
+    },
+    {
+      "pose_index": 5,
+      "timestamp_ns": 1125000000,
+      "rgb": "frames/pose_00005/rgb.png",
+      "depth": "frames/pose_00005/depth.npy",
+      "mask": "frames/pose_00005/mask.png",
+      "source_w2c": [
+        [1.0, 0.0, 0.0, 5.0],
+        [0.0, 1.0, 0.0, 0.5],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "target_w2c": [
+        [1.0, 0.0, 0.0, 6.0],
+        [0.0, 1.0, 0.0, 0.5],
+        [0.0, 0.0, 1.0, 0.0],
+        [0.0, 0.0, 0.0, 1.0]
+      ],
+      "mask_stats": {
+        "sky_fraction": 0.12,
+        "out_of_range_fraction": 0.0,
+        "edge_fraction": 0.03,
+        "valid_fraction": 0.77,
+        "valid_fraction_of_content": 0.875
+      },
+      "depth_percentiles_m": {
+        "p50": 13.0,
+        "p95": 41.0,
+        "p99": 56.0,
+        "max": 72.0
+      }
+    }
+  ],
+  "summary": {
+    "frame_count": 2,
+    "mean_valid_fraction": 0.785,
+    "mean_valid_fraction_of_content": 0.8819444444444444
+  }
+}

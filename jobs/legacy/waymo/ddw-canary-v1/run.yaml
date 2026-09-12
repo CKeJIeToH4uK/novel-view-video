@@ -1,0 +1,17 @@
+schema_version: 1
+name: waymo-ddw-canary-v1
+
+workflow:
+  name: waymo_ddw_canary
+  version: 1
+
+input:
+  reader: waymo_v2
+  dataset: waymo
+  selection: selections/local/waymo-ddw-exposed-debug.yaml
+  depth_selection: waymo-depth-selection-v2/example/attempts/0001/depth-selection.json
+
+recipe: recipes/legacy/waymo/ddw-full-axis.yaml
+
+execution:
+  preset: inference_cp1

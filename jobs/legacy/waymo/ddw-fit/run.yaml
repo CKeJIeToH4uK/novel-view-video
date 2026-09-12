@@ -1,0 +1,9 @@
+schema_version: 1
+name: waymo-ddw-fit
+workflow: {name: waymo_ddw_fit, version: 1}
+input:
+  reader: waymo_v2
+  dataset: waymo
+  selection: selections/legacy/waymo/example-fit-subset.yaml
+recipe: recipes/legacy/waymo/ddw-fit.yaml
+execution: {preset: inference_cp1}

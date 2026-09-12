@@ -1,0 +1,3 @@
+schema_version: 1
+parameters:
+  bake_dense_stride: 5

@@ -1,0 +1,26 @@
+schema_version: 1
+
+parameters:
+  model:
+    checkpoint: gen3c/official/checkpoints/Gen3C-Cosmos-7B/model.pt
+  training:
+    method: lora
+    objective:
+      name: gen3c-kendall-edm-lidar-depth
+      version: 1
+      depth_weight: 0.1
+      observer:
+        init_seed: 0
+        fit_order_seed: 0
+        fit_epochs: 10
+        items_per_step: 1
+        optimizer:
+          name: adamw
+          learning_rate: 0.001
+          betas: [0.9, 0.999]
+          epsilon: 1.0e-8
+          weight_decay: 0.0
+          scheduler: constant
+    epochs: 2
+    training_seed: 0
+    validation_seed: 1

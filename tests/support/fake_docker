@@ -1,0 +1,411 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+docker_command="$1"
+
+{
+  printf '%s' "${docker_command}"
+  shift
+  printf '\t%s' "$@"
+  printf '\n'
+} >> "${FAKE_DOCKER_LOG}"
+
+fake_argument_after() {
+  local wanted="$1"
+  shift
+  local previous=''
+  local value
+  for value in "$@"; do
+    if [[ "${previous}" == "${wanted}" ]]; then
+      printf '%s\n' "${value}"
+      return 0
+    fi
+    previous="${value}"
+  done
+  return 1
+}
+
+fake_select_job() {
+  local job_file="$1"
+  local directory="${job_file%/run.yaml}"
+  local key="${directory##*/}"
+
+  FAKE_SELECTED_JOB="${key}"
+  FAKE_SELECTED_VARIANT=core
+  FAKE_SELECTED_PRESET=inference_cp1
+  case "${key}" in
+    lifecycle-smoke) FAKE_SELECTED_VARIANT=cpu-test; FAKE_SELECTED_PRESET=cpu_test ;;
+    *comparison* | *handoff*) FAKE_SELECTED_PRESET=cpu_test ;;
+    r4c-select-v1)
+      FAKE_SELECTED_JOB=select-r4c-lora-edm
+      FAKE_SELECTED_PRESET=cpu_test
+      ;;
+    r4c-select-v2)
+      FAKE_SELECTED_JOB=select-r4c-lora-lidar-depth
+      FAKE_SELECTED_PRESET=cpu_test
+      ;;
+    *cp2 | gaussian-full-sequence-v1 | gaussian-independent-clip-v1 | \
+      gaussian-dense-independent-v1 | gaussian-dense-overlap21-v1)
+      FAKE_SELECTED_PRESET=inference_cp2
+      ;;
+    r4c-lora-*) FAKE_SELECTED_PRESET=training_cp4 ;;
+    r4c-ddw-evaluation)
+      FAKE_SELECTED_JOB=compare-r4c-edm-depth
+      FAKE_SELECTED_VARIANT=moge
+      FAKE_SELECTED_PRESET=training_cp4
+      ;;
+    r4c-ddw-prepared | stage11-waymo-one-item) FAKE_SELECTED_VARIANT=moge ;;
+    waymo-depth-selection-v2) FAKE_SELECTED_PRESET=cpu_test ;;
+    waymo-depth-candidates | waymo-ddw-*) FAKE_SELECTED_VARIANT=moge ;;
+  esac
+  [[ "${key}" == gaussian-dense-overlap21-v1 ]] && FAKE_SELECTED_VARIANT=moge
+  FAKE_SELECTED_VARIANT="${FAKE_DOCKER_SELECTOR_VARIANT:-${FAKE_SELECTED_VARIANT}}"
+  FAKE_SELECTED_PRESET="${FAKE_DOCKER_SELECTOR_PRESET:-${FAKE_SELECTED_PRESET}}"
+}
+
+case "${docker_command}" in
+  version)
+    printf '%s\n' '28.4.0'
+    ;;
+  info)
+    case "${2:-}" in
+      *Architecture*) printf '%s\n' 'x86_64' ;;
+      *Driver*) printf '%s\n' 'overlay2' ;;
+      *DockerRootDir*) printf '%s\n' "${FAKE_DOCKER_ROOT}" ;;
+      *) exit 91 ;;
+    esac
+    ;;
+  build)
+    exit "${FAKE_DOCKER_BUILD_EXIT:-0}"
+    ;;
+  load)
+    [[ -f "${2:-}" ]] || exit 1
+    exit "${FAKE_DOCKER_LOAD_EXIT:-0}"
+    ;;
+  image)
+    core_id="${FAKE_DOCKER_CORE_ID:-sha256:fake-core-image}"
+    moge_id="${FAKE_DOCKER_MOGE_ID:-sha256:fake-moge-image}"
+    case "${3:-}" in
+      '{{.Id}}')
+        case "${4:-}" in
+          *cpu-test) image_id=sha256:fake-cpu-image ;;
+          "${core_id}") image_id="${core_id}" ;;
+          *-core) image_id="${FAKE_DOCKER_TAG_CORE_ID:-${core_id}}" ;;
+          "${moge_id}" | *-moge) image_id="${moge_id}" ;;
+          *) image_id=sha256:fake-image ;;
+        esac
+        if [[ "${FAKE_DOCKER_TAG_RACE:-0}" == "1" ]]; then
+          [[ -e "${FAKE_DOCKER_ROOT}/tag-inspected" ]] && image_id=sha256:raced-image
+          : > "${FAKE_DOCKER_ROOT}/tag-inspected"
+        fi
+        printf '%s\n' "${image_id}"
+        ;;
+      *'{{.Os}}/{{.Architecture}}|'*)
+        variant=core
+        [[ "${4:-}" == "${moge_id}" || "${4:-}" == *moge* ]] && variant=moge
+        variant="${FAKE_DOCKER_LABEL_VARIANT:-${variant}}"
+        printf 'linux/amd64|%s|false|%s|%s|db2ffe12ced12ddafcec5e0422ee46ce8520746b|7764ea0f912e53c92e82eb78a2a1631e92725fc8\n' \
+          "${FAKE_DOCKER_SOURCE_REVISION:-fake-revision}" \
+          "${FAKE_DOCKER_LOCK_REVISION:-sha256:fake-lock}" \
+          "${variant}"
+        ;;
+      *'{{.Config.User}}'*) printf '%s\n' "${FAKE_DOCKER_USER:-distil3d}" ;;
+      *org.opencontainers.image.revision*)
+        printf '%s\n' "${FAKE_DOCKER_SOURCE_REVISION:-fake-revision}"
+        ;;
+      *io.distil3d.source.dirty*) printf '%s\n' 'false' ;;
+      *io.distil3d.lock.revision*)
+        printf '%s\n' "${FAKE_DOCKER_LOCK_REVISION:-sha256:fake-lock}"
+        ;;
+      *io.distil3d.variant*)
+        if [[ -n "${FAKE_DOCKER_LABEL_VARIANT:-}" ]]; then
+          printf '%s\n' "${FAKE_DOCKER_LABEL_VARIANT}"
+        elif [[ "${4:-}" == "${moge_id}" || "${4:-}" == *moge* ]]; then
+          printf '%s\n' moge
+        elif [[ "${4:-}" == *cpu* ]]; then
+          printf '%s\n' cpu-test
+        else
+          printf '%s\n' core
+        fi
+        ;;
+      *) exit 93 ;;
+    esac
+    ;;
+  run)
+    case " $* " in
+      *" novel_view.cli.candidate read "*)
+        if [[ "${FAKE_DOCKER_CANDIDATE_EXIT:-0}" != 0 ]]; then
+          printf '%s\n' 'candidate: invalid synthetic candidate' >&2
+          exit "${FAKE_DOCKER_CANDIDATE_EXIT}"
+        fi
+        printf '%s\n' \
+          "candidate_id=${FAKE_DOCKER_CANDIDATE_ID}" \
+          "source_revision=${FAKE_DOCKER_SOURCE_REVISION}" \
+          'source_dirty=false' \
+          'platform=linux/amd64' \
+          "lock_revision=${FAKE_DOCKER_LOCK_REVISION}" \
+          'core_tag=distil3d:cuda124-sm80-core' \
+          "core_image_id=${FAKE_DOCKER_CORE_ID}" \
+          'moge_tag=distil3d:cuda124-sm80-moge' \
+          "moge_image_id=${FAKE_DOCKER_MOGE_ID}" \
+          'transport=docker-save'
+        ;;
+      *" select-resume "*)
+        resume_attempt="$(fake_argument_after --attempt-id "$@")"
+        resume_job="$(fake_argument_after --job-name "$@")"
+        resume_run="$(fake_argument_after --run-id "$@")"
+        fake_select_job "/project-config/jobs/${resume_job}/run.yaml"
+        printf '%s\n' \
+          "job_name=${resume_job}" \
+          "image_variant=${FAKE_SELECTED_VARIANT}" \
+          "preset=${FAKE_SELECTED_PRESET}" \
+          "resume_record=/runs/${resume_job}/${resume_run}/attempts/${resume_attempt}/attempt.json"
+        exit "${FAKE_DOCKER_SELECTOR_EXIT:-0}"
+        ;;
+      *" select "*)
+        job_file="$(fake_argument_after --job "$@")"
+        fake_select_job "${job_file}"
+        printf '%s\n' \
+          "job_name=${FAKE_SELECTED_JOB}" \
+          "image_variant=${FAKE_SELECTED_VARIANT}" \
+          "preset=${FAKE_SELECTED_PRESET}"
+        exit "${FAKE_DOCKER_SELECTOR_EXIT:-0}"
+        ;;
+      *" plan "*)
+        if [[ -n "${FAKE_DOCKER_PLAN_WAIT_CASE:-}" && \
+          "$*" == *"/${FAKE_DOCKER_PLAN_WAIT_CASE}/run.yaml"* ]]; then
+          printf 'plan\n' >> "${FAKE_DOCKER_ROOT}/plans-waited"
+          if [[ "$(wc -l < "${FAKE_DOCKER_ROOT}/plans-waited" | tr -d ' ')" == 3 ]]; then
+            : > "${FAKE_DOCKER_CREATE_READY}"
+            sleep 0.4
+          fi
+        fi
+        printf '%s\n' '{"job":{"name":"lifecycle-smoke"}}'
+        exit "${FAKE_DOCKER_MISMATCH_EXIT:-${FAKE_DOCKER_PLAN_EXIT:-0}}"
+        ;;
+      *" describe-attempt "*)
+        snapshot_job="$(fake_argument_after --job-name "$@")"
+        snapshot_run="$(fake_argument_after --run-id "$@")"
+        snapshot_attempt="$(fake_argument_after --attempt-id "$@")"
+        snapshot_state="${FAKE_DOCKER_RECORDED_STATE:-succeeded}"
+        snapshot_present="${FAKE_DOCKER_RECORD_PRESENT:-true}"
+        if [[ "${snapshot_job}" == native-te-recompute ]]; then
+          snapshot_state=absent
+          snapshot_present=false
+        fi
+        if [[ "${snapshot_job}" == "${FAKE_DOCKER_SCIENTIFIC_STOP_CASE:-}" || \
+          ( "${snapshot_present}" == true && -n "${FAKE_DOCKER_FAIL_CASE:-}" && \
+            "${snapshot_job}" == *"${FAKE_DOCKER_FAIL_CASE}"* ) ]]; then
+          snapshot_state=failed
+        fi
+        printf '%s\n' \
+          "attempt_ref=${FAKE_DOCKER_SNAPSHOT_REF:-${snapshot_job}/${snapshot_run}/${snapshot_attempt}}" \
+          "recorded_state=${snapshot_state}" \
+          "record_present=${snapshot_present}"
+        exit "${FAKE_DOCKER_SNAPSHOT_EXIT:-0}"
+        ;;
+      *" novel_view.cli.acceptance checkpoint "*)
+        expected="$(fake_argument_after --expected-attempt "$@")"
+        printf 'source_attempt=%s\ncompleted_step=77\ncheckpoint=/runs/%s/checkpoints/step-000000077.pt\n' \
+          "${expected}" "${expected%/*}/attempts/${expected##*/}"
+        ;;
+      *" novel_view.cli.acceptance selection "*)
+        expected="$(fake_argument_after --expected-attempt "$@")"
+        version="$(fake_argument_after --version "$@")"
+        if [[ "${FAKE_DOCKER_SELECTION_FAIL_VERSION:-}" == "${version}" ]]; then
+          exit 81
+        fi
+        printf 'training_attempt=%s\ncompleted_step=%s\ncheckpoint_record=%s/checkpoints/step-000000154.json\ncheckpoint=%s/checkpoints/step-000000154.pt\n' \
+          "${expected}" "${FAKE_DOCKER_SELECTION_STEP:-154}" \
+          "${expected%/*}/attempts/${expected##*/}" \
+          "${expected%/*}/attempts/${expected##*/}"
+        ;;
+      *" novel_view.cli.acceptance waymo-"*)
+        record_path="$(fake_argument_after --path "$@")"
+        record_job="${record_path#/runs/}"
+        record_job="${record_job%%/*}"
+        [[ "${record_job}" != "${FAKE_DOCKER_RECORD_FAIL_CASE:-}" ]] || exit 81
+        outcome=passed
+        expected_exit=0
+        backend=none
+        allowed=false
+        case "${record_job}" in
+          waymo-depth-candidates)
+            format=gen3c-waymo-depth-candidate/v2
+            outcome=completed
+            ;;
+          waymo-depth-selection-v2)
+            format=gen3c-waymo-depth-selection/v4
+            outcome=selected
+            case "${FAKE_DOCKER_DEPTH_CHOICE:-moge}" in
+              moge) backend=moge-v1-lidar-scale; allowed=true ;;
+              vggt) backend=vggt-omega-sim3 ;;
+              stop) outcome=scientific_stop ;;
+            esac
+            ;;
+          waymo-ddw-canary-v1) format=gen3c-waymo-ddw-engineering-canary/v2 ;;
+          waymo-ddw-canary-v2) format=gen3c-waymo-ddw-v2-canary/v2 ;;
+          waymo-ddw-probe) format=gen3c-waymo-ddw-v3-probe/v2 ;;
+          waymo-ddw-survey) format=gen3c-waymo-ddw-survey/v2 ;;
+        esac
+        if [[ "${record_job}" == "${FAKE_DOCKER_SCIENTIFIC_STOP_CASE:-}" ]]; then
+          outcome=scientific_stop
+          expected_exit=2
+        fi
+        printf 'format=%s\noutcome=%s\nexpected_exit=%s\nselected_backend=%s\nddw_allowed=%s\n' \
+          "${format}" "${outcome}" "${expected_exit}" "${backend}" "${allowed}"
+        ;;
+      *" doctor "*)
+        exit "${FAKE_DOCKER_DOCTOR_EXIT:-0}"
+        ;;
+      *)
+        exit "${FAKE_DOCKER_RUN_EXIT:-0}"
+        ;;
+    esac
+    ;;
+  create)
+    rm -f -- "${FAKE_DOCKER_ROOT}/after-stop"
+    attempt_ref=''
+    runs_root=''
+    evidence_root=''
+    for value in "$@"; do
+      case "${value}" in
+        io.distil3d.attempt-ref=*) attempt_ref="${value#*=}" ;;
+        type=bind,src=*,dst=/runs*)
+          runs_root="${value#type=bind,src=}"
+          runs_root="${runs_root%%,dst=/runs*}"
+          ;;
+        type=bind,src=*,dst=/evidence)
+          evidence_root="${value#type=bind,src=}"
+          evidence_root="${evidence_root%,dst=/evidence}"
+          ;;
+      esac
+    done
+    if [[ -n "${FAKE_DOCKER_CREATE_WAIT_CASE:-}" && \
+      "${attempt_ref}" == "${FAKE_DOCKER_CREATE_WAIT_CASE}"/* ]]; then
+      : > "${FAKE_DOCKER_CREATE_READY}"
+      sleep 0.4
+    fi
+    container_id="fake-${attempt_ref//\//-}"
+    printf '%s\n' "${attempt_ref}" > "${FAKE_DOCKER_ROOT}/container-ref"
+    printf '%s\n' "${container_id}" > "${FAKE_DOCKER_ROOT}/container-id"
+    printf '%s\n' "${runs_root}" > "${FAKE_DOCKER_ROOT}/runs-root"
+    printf '%s\n' "${evidence_root}" > "${FAKE_DOCKER_ROOT}/evidence-root"
+    printf '%s\n' "${container_id}"
+    ;;
+  start)
+    attempt_ref="$(cat "${FAKE_DOCKER_ROOT}/container-ref")"
+    if [[ -n "${FAKE_DOCKER_CREATE_WAIT_CASE:-${FAKE_DOCKER_PLAN_WAIT_CASE:-}}" && \
+      "${attempt_ref}" == "${FAKE_DOCKER_CREATE_WAIT_CASE:-${FAKE_DOCKER_PLAN_WAIT_CASE:-}}"/* ]]; then
+      rm -f -- "${FAKE_DOCKER_CREATE_READY}"
+    fi
+    if [[ "${attempt_ref}" == native-te-recompute/* ]]; then
+      evidence_root="$(cat "${FAKE_DOCKER_ROOT}/evidence-root")"
+      if [[ "${FAKE_DOCKER_FAIL_OOM:-false}" != true ]]; then
+        printf '<testsuites/>\n' > "${evidence_root}/junit.xml"
+      fi
+      exit "${FAKE_DOCKER_START_EXIT:-0}"
+    fi
+    runs_root="$(cat "${FAKE_DOCKER_ROOT}/runs-root")"
+    attempt_root="${runs_root}/${attempt_ref%/*}/attempts/${attempt_ref##*/}"
+    mkdir -p -- "${attempt_root}"
+    printf '{}\n' > "${attempt_root}/selection.json"
+    printf '{}\n' > "${attempt_root}/ddw-heldout-point-evaluation.json"
+    printf '{}\n' > "${attempt_root}/result.json"
+    printf '{}\n' > "${attempt_root}/depth-selection.json"
+    printf 'synthetic\n' > "${attempt_root}/frames.csv"
+    printf 'synthetic\n' > "${attempt_root}/pairs.csv"
+    printf 'synthetic\n' > "${attempt_root}/summary.csv"
+    exit "${FAKE_DOCKER_START_EXIT:-0}"
+    ;;
+  logs)
+    if [[ -n "${FAKE_DOCKER_LOG_CONTENT:-}" ]]; then
+      printf '%s\n' "${FAKE_DOCKER_LOG_CONTENT}"
+    fi
+    if [[ "${FAKE_DOCKER_LOGS_WAIT:-0}" == "1" && \
+      ( -z "${FAKE_DOCKER_ACTIVE_CASE:-}" || "${!#}" == *"${FAKE_DOCKER_ACTIVE_CASE}"* ) ]]; then
+      : > "${FAKE_DOCKER_LOGS_READY}"
+      fake_sleep_pid=""
+      trap '
+        if [[ -n "${fake_sleep_pid}" ]]; then
+          kill "${fake_sleep_pid}" 2>/dev/null || true
+          wait "${fake_sleep_pid}" 2>/dev/null || true
+        fi
+        exit 130
+      ' INT TERM
+      while true; do
+        sleep 60 &
+        fake_sleep_pid=$!
+        wait "${fake_sleep_pid}" || true
+      done
+    fi
+    exit "${FAKE_DOCKER_LOGS_EXIT:-0}"
+    ;;
+  stop)
+    [[ "${FAKE_DOCKER_STOP_EXIT:-0}" == 0 ]] || exit "${FAKE_DOCKER_STOP_EXIT}"
+    printf '%s\n' "${FAKE_DOCKER_AFTER_STOP_INSPECT:-exited 143 false}" \
+      > "${FAKE_DOCKER_ROOT}/after-stop"
+    ;;
+  rm)
+    [[ "${FAKE_DOCKER_RM_EXIT:-0}" == 0 ]] || exit "${FAKE_DOCKER_RM_EXIT}"
+    rm -f -- "${FAKE_DOCKER_ROOT}/container-ref" "${FAKE_DOCKER_ROOT}/container-id"
+    exit "${FAKE_DOCKER_RM_EXIT:-0}"
+    ;;
+  inspect)
+    container_id="${!#}"
+    case "${2:-}" in
+      *io.distil3d.attempt-id*) printf '%s\n' 'source-attempt' ;;
+      *State.Status*)
+        if [[ -f "${FAKE_DOCKER_ROOT}/after-stop" ]]; then
+          cat "${FAKE_DOCKER_ROOT}/after-stop"
+        elif [[ -n "${FAKE_DOCKER_CREATE_WAIT_CASE:-${FAKE_DOCKER_PLAN_WAIT_CASE:-}}" && \
+          "${container_id}" == *"${FAKE_DOCKER_CREATE_WAIT_CASE:-${FAKE_DOCKER_PLAN_WAIT_CASE:-}}"* && \
+          -f "${FAKE_DOCKER_CREATE_READY}" ]]; then
+          printf 'created 0 false\n'
+        elif [[ -n "${FAKE_DOCKER_FAIL_CASE:-}" && \
+          "${container_id}" == *"${FAKE_DOCKER_FAIL_CASE}"* ]]
+        then
+          printf 'exited %s %s\n' "${FAKE_DOCKER_FAIL_EXIT:-23}" "${FAKE_DOCKER_FAIL_OOM:-false}"
+        elif [[ -n "${FAKE_DOCKER_SCIENTIFIC_STOP_CASE:-}" && \
+          "${container_id}" == *"${FAKE_DOCKER_SCIENTIFIC_STOP_CASE}"* ]]
+        then
+          printf 'exited 2 %s\n' "${FAKE_DOCKER_STOP_OOM:-false}"
+        elif [[ -n "${FAKE_DOCKER_ACTIVE_CASE:-}" && \
+          "${container_id}" == *"${FAKE_DOCKER_ACTIVE_CASE}"* ]]
+        then
+          printf 'running 0 false\n'
+        else
+          printf '%s %s %s\n' \
+            "${FAKE_DOCKER_CONTAINER_STATE:-exited}" \
+            "${FAKE_DOCKER_CONTAINER_EXIT:-0}" \
+            "${FAKE_DOCKER_CONTAINER_OOM:-false}"
+        fi
+        ;;
+      *State.ExitCode*) printf '%s\n' "${FAKE_DOCKER_CONTAINER_EXIT:-0}" ;;
+      *) exit 94 ;;
+    esac
+    ;;
+  ps)
+    if [[ " $* " == *" label=io.distil3d.attempt-ref="* ]]; then
+      if [[ -n "${FAKE_DOCKER_EXACT_CONTAINER:-}" ]]; then
+        printf '%s\n' "${FAKE_DOCKER_EXACT_CONTAINER}"
+      elif [[ -f "${FAKE_DOCKER_ROOT}/container-ref" ]]; then
+        requested="$(fake_argument_after --filter "$@")"
+        requested="${requested#label=io.distil3d.attempt-ref=}"
+        if [[ "$(cat "${FAKE_DOCKER_ROOT}/container-ref")" == "${requested}" ]]; then
+          cat "${FAKE_DOCKER_ROOT}/container-id"
+        fi
+      fi
+    elif [[ " $* " == *".Label"* ]]; then
+      if [[ -n "${FAKE_DOCKER_ACTIVE_ROWS:-}" ]]; then
+        printf '%s\n' "${FAKE_DOCKER_ACTIVE_ROWS}"
+      fi
+    elif [[ -n "${FAKE_DOCKER_SOURCE_CONTAINER:-}" ]]; then
+      printf '%s\n' "${FAKE_DOCKER_SOURCE_CONTAINER}"
+    fi
+    ;;
+  *)
+    exit 92
+    ;;
+esac

@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DISTIL3D_REPOSITORY_ROOT="$(
+  CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P
+)"
+readonly DISTIL3D_REPOSITORY_ROOT
+
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/profile.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/images.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/attempts.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/observability.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/doctor.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/tests.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/accept_foundation.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/accept_attempt.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/accept_campaign.sh"
+. "${DISTIL3D_REPOSITORY_ROOT}/containers/launcher/accept.sh"
+
+distil3d_usage() {
+  cat <<'EOF'
+Usage:
+  ./distil3d build [--variant core|moge] [--candidate-output <new-directory>]
+  ./distil3d doctor host --profile <profile-directory>
+  ./distil3d doctor job --profile <profile-directory> <job-directory>
+  ./distil3d doctor waymo-ingress --profile <profile-directory> -- <diagnostic-options>
+  ./distil3d doctor waymo-raster --profile <profile-directory> -- <diagnostic-options>
+  ./distil3d test [unit|contract|integration|all]
+  ./distil3d plan --profile <profile-directory> <job-directory>
+  ./distil3d run --profile <profile-directory> <job-directory> [--run-id <id>] [--detach]
+  ./distil3d resume --profile <profile-directory> <job-name>/<run-id>/<source-attempt-id> --checkpoint <container-path> [--detach]
+  ./distil3d status --profile <profile-directory> <job-name>/<run-id>[/<attempt-id>]
+  ./distil3d logs --profile <profile-directory> <job-name>/<run-id>[/<attempt-id>] [-f]
+  ./distil3d stop --profile <profile-directory> <job-name>/<run-id>[/<attempt-id>] [--grace-seconds <n>]
+  ./distil3d remove --profile <profile-directory> <job-name>/<run-id>[/<attempt-id>]
+  ./distil3d accept a100-4 --candidate <bundle/candidate.json> --profile <profile-directory> --output <evidence-directory>
+  ./distil3d --help
+EOF
+}
+
+distil3d_main() {
+  if [[ $# -eq 0 ]]; then
+    distil3d_usage
+    return 0
+  fi
+
+  case "$1" in
+    build)
+      shift
+      distil3d_build_main "$@"
+      ;;
+    doctor)
+      shift
+      distil3d_doctor_main "$@"
+      ;;
+    test)
+      shift
+      distil3d_test_main "$@"
+      ;;
+    plan)
+      shift
+      distil3d_plan_main "$@"
+      ;;
+    run)
+      shift
+      distil3d_run_main "$@"
+      ;;
+    resume)
+      shift
+      distil3d_resume_main "$@"
+      ;;
+    status)
+      shift
+      distil3d_status_main "$@"
+      ;;
+    logs)
+      shift
+      distil3d_logs_main "$@"
+      ;;
+    stop)
+      shift
+      distil3d_stop_main "$@"
+      ;;
+    remove)
+      shift
+      distil3d_remove_main "$@"
+      ;;
+    accept)
+      shift
+      if [[ "${1:-}" != a100-4 ]]; then
+        printf 'accept requires the fixed a100-4 target\n' >&2
+        _distil3d_accept_usage >&2
+        return 2
+      fi
+      shift
+      accept_a100_4 "$@"
+      ;;
+    -h | --help | help)
+      distil3d_usage
+      ;;
+    *)
+      printf 'unknown command: %s\n' "$1" >&2
+      distil3d_usage >&2
+      return 2
+      ;;
+  esac
+}
+
+distil3d_main "$@"

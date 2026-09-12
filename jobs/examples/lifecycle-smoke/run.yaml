@@ -1,0 +1,15 @@
+schema_version: 1
+name: lifecycle-smoke
+
+workflow:
+  name: _lifecycle_smoke
+  version: 1
+
+input: {}
+
+parameters:
+  mode: success
+  exit_code: 0
+
+execution:
+  preset: cpu_test

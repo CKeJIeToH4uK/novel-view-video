@@ -1,0 +1,18 @@
+schema_version: 1
+name: gaussian-dense-independent-v1
+
+workflow:
+  name: gaussian_generation
+  version: 3
+
+input:
+  reader: gaussian_depth_export
+  info_file: gaussian/replace-export/export.json
+  source_transforms: gaussian/replace-camera-table/transforms.json
+  source_intrinsics: gaussian/replace-camera-table/intrinsics.json
+  selection: selections/gaussian/dense-independent.yaml
+
+recipe: recipes/gaussian-generation/dense-independent.yaml
+
+execution:
+  preset: inference_cp2

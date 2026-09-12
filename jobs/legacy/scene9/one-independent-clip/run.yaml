@@ -1,0 +1,16 @@
+schema_version: 1
+name: scene9-one-independent-clip
+
+workflow:
+  name: gaussian_generation
+  version: 2
+
+input:
+  reader: gaussian_depth_export
+  info_file: gaussian/scene9-full-native-left1-v1/manifest.json
+  selection: selections/legacy/scene9/one-independent-clip.yaml
+
+recipe: recipes/gaussian-generation/independent-clip.yaml
+
+execution:
+  preset: inference_cp2
